@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #2c3e50;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .calculator {
+            background: #f9e79f;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            width: 420px;
+            backdrop-filter: blur(10px);
+        }
+
+        .display {
+            background: #fff9c4;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            text-align: right;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 2px solid #f4d03f;
+        }
+
+        .expression {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            min-height: 22px;
+        }
+
+        .result {
+            font-size: 42px;
+            font-weight: bold;
+            color: #2c3e50;
+            min-height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            height: 70px;
+            border: none;
+            border-radius: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-number {
+            background: #fdeaa7;
+            color: #2c3e50;
+            border: 2px solid #f9ca24;
+        }
+
+        .btn-number:hover {
+            background: #f9ca24;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 202, 36, 0.4);
+        }
+
+        .btn-operator {
+            background: #f39c12;
+            color: white;
+            border: 2px solid #e67e22;
+        }
+
+        .btn-operator:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+        }
+
+        .btn-special {
+            background: #e74c3c;
+            color: white;
+            border: 2px solid #c0392b;
+        }
+
+        .btn-special:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(192, 57, 43, 0.4);
+        }
+
+        .btn-enter {
+            background: #d35400;
+            color: white;
+            grid-column: span 2;
+            border: 2px solid #a04000;
+        }
+
+        .btn-enter:hover {
+            background: #a04000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(160, 64, 0, 0.4);
+        }
+
+        .btn-zero {
+            grid-column: span 2;
+        }
+
+        .btn-ans {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <div class="expression" id="expression"></div>
+            <div class="result" id="result">0</div>
+        </div>
+        <div class="buttons">
+            <button class="btn-special" onclick="clearEntry()">CE</button>
+            <button class="btn-special" onclick="backspace()">⌫</button>
+            <button class="btn-special" onclick="showAnswer()">ans</button>
+            <button class="btn-special" onclick="clearAll()">del</button>
+            <button class="btn-special" onclick="clearAll()">clear</button>
+            
+            <button class="btn-number" onclick="appendNumber('7')">7</button>
+            <button class="btn-number" onclick="appendNumber('8')">8</button>
+            <button class="btn-number" onclick="appendNumber('9')">9</button>
+            <button class="btn-operator" onclick="appendOperator('%')">%</button>
+            <button class="btn-operator" onclick="calculateSquareRoot()">√</button>
+            
+            <button class="btn-number" onclick="appendNumber('4')">4</button>
+            <button class="btn-number" onclick="appendNumber('5')">5</button>
+            <button class="btn-number" onclick="appendNumber('6')">6</button>
+            <button class="btn-operator" onclick="appendOperator('*')">×</button>
+            <button class="btn-operator" onclick="appendOperator('/')">/</button>
+            
+            <button class="btn-number" onclick="appendNumber('1')">1</button>
+            <button class="btn-number" onclick="appendNumber('2')">2</button>
+            <button class="btn-number" onclick="appendNumber('3')">3</button>
+            <button class="btn-operator" onclick="appendOperator('+')">+</button>
+            <button class="btn-operator" onclick="appendOperator('-')">-</button>
+            
+            <button class="btn-number" onclick="appendDecimal()">.</button>
+            <button class="btn-number btn-zero" onclick="appendNumber('0')">0</button>
+            <button class="btn-operator" onclick="appendOperator('+')">+</button>
+            <button class="btn-enter" onclick="calculate()">ENTER</button>
+        </div>
+    </div>
+
+    <script>
+        let currentInput = '';
+        let operator = '';
+        let previousInput = '';
+        let lastAnswer = 0;
+        let shouldResetDisplay = false;
+
+        const expressionElement = document.getElementById('expression');
+        const resultElement = document.getElementById('result');
+
+        function updateDisplay() {
+            if (currentInput === '') {
+                resultElement.textContent = '0';
+            } else {
+                resultElement.textContent = currentInput;
+            }
+        }
+
+        function updateExpression(expr) {
+            expressionElement.textContent = expr;
+        }
+
+        function appendNumber(num) {
+            if (shouldResetDisplay) {
+                currentInput = '';
+                shouldResetDisplay = false;
+            }
+            
+            if (currentInput === '0' && num !== '.') {
+                currentInput = num;
+            } else {
+                currentInput += num;
+            }
+            updateDisplay();
+        }
+
+        function appendDecimal() {
+            if (shouldResetDisplay) {
+                currentInput = '0';
+                shouldResetDisplay = false;
+            }
+            
+            if (currentInput === '') {
+                currentInput = '0';
+            }
+            
+            if (currentInput.indexOf('.') === -1) {
+                currentInput += '.';
+            }
+            updateDisplay();
+        }
+
+        function appendOperator(op) {
+            if (currentInput === '' && previousInput === '') {
+                return;
+            }
+            
+            if (currentInput === '' && previousInput !== '') {
+                operator = op;
+                updateExpression(previousInput + ' ' + getOperatorSymbol(op));
+                return;
+            }
+            
+            if (previousInput !== '' && currentInput !== '' && operator !== '') {
+                calculate();
+            }
+            
+            operator = op;
+            previousInput = currentInput;
+            updateExpression(currentInput + ' ' + getOperatorSymbol(op));
+            currentInput = '';
+        }
+
+        function getOperatorSymbol(op) {
+            switch(op) {
+                case '*': return '×';
+                case '/': return '÷';
+                case '%': return '%';
+                default: return op;
+            }
+        }
+
+        function calculate() {
+            if (previousInput === '' || currentInput === '' || operator === '') {
+                return;
+            }
+            
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+            let result;
+            
+            switch(operator) {
+                case '+':
+                    result = prev + current;
+                    break;
+                case '-':
+                    result = prev - current;
+                    break;
+                case '*':
+                    result = prev * current;
+                    break;
+                case '/':
+                    if (current === 0) {
+                        alert('Cannot divide by zero!');
+                        return;
+                    }
+                    result = prev / current;
+                    break;
+                case '%':
+                    result = prev % current;
+                    break;
+                default:
+                    return;
+            }
+            
+            // Round to avoid floating point precision issues
+            result = Math.round(result * 100000000) / 100000000;
+            
+            updateExpression(previousInput + ' ' + getOperatorSymbol(operator) + ' ' + currentInput + ' =');
+            currentInput = result.toString();
+            lastAnswer = result;
+            updateDisplay();
+            
+            previousInput = '';
+            operator = '';
+            shouldResetDisplay = true;
+        }
+
+        function calculateSquareRoot() {
+            if (currentInput === '') {
+                return;
+            }
+            
+            const num = parseFloat(currentInput);
+            if (num < 0) {
+                alert('Cannot calculate square root of negative number!');
+                return;
+            }
+            
+            const result = Math.sqrt(num);
+            updateExpression('√' + currentInput + ' =');
+            currentInput = result.toString();
+            lastAnswer = result;
+            updateDisplay();
+            shouldResetDisplay = true;
+        }
+
+        function clearAll() {
+            currentInput = '';
+            previousInput = '';
+            operator = '';
+            updateDisplay();
+            updateExpression('');
+        }
+
+        function clearEntry() {
+            currentInput = '';
+            updateDisplay();
+        }
+
+        function backspace() {
+            if (currentInput.length > 0) {
+                currentInput = currentInput.slice(0, -1);
+                updateDisplay();
+            }
+        }
+
+        function showAnswer() {
+            currentInput = lastAnswer.toString();
+            updateDisplay();
+        }
+
+        document.addEventListener('keydown', function(event) {
+            const key = event.key;
+            
+            if (key >= '0' && key <= '9') {
+                appendNumber(key);
+            } else if (key === '.') {
+                appendDecimal();
+            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                appendOperator(key);
+            } else if (key === 'Enter' || key === '=') {
+                calculate();
+            } else if (key === 'Escape') {
+                clearAll();
+            } else if (key === 'Backspace') {
+                backspace();
+            }
+        });
+
+        updateDisplay();
+    </script>
+</body>
+</html>

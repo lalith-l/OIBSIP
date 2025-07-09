@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXT Business Card</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .card-mockup {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transform: perspective(1000px) rotateX(10deg) rotateY(-10deg);
+        }
+        
+        .business-card {
+            width: 350px;
+            height: 200px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 12px;
+            padding: 30px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #1e3c72;
+            font-size: 1.1rem;
+        }
+        
+        .brand-info h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin: 0;
+        }
+        
+        .brand-info p {
+            font-size: 0.7rem;
+            opacity: 0.9;
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .person-info {
+            text-align: right;
+        }
+        
+        .person-info h2 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .person-info p {
+            font-size: 0.8rem;
+            opacity: 0.85;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .contact-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .contact-item {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contact-icon {
+            width: 12px;
+            height: 12px;
+            opacity: 0.8;
+        }
+        
+        .website {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            text-align: right;
+        }
+        
+        @media (max-width: 768px) {
+            .business-card {
+                width: 320px;
+                height: 180px;
+                padding: 25px;
+            }
+            
+            .brand-info h1 {
+                font-size: 1.5rem;
+            }
+            
+            .person-info h2 {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-mockup">
+        <div class="business-card">
+            <div class="card-header">
+                <div class="logo-section">
+                    <div class="logo-icon">N</div>
+                    <div class="brand-info">
+                        <h1>NEXT</h1>
+                        <p>Premium Footwear</p>
+                    </div>
+                </div>
+                
+                <div class="person-info">
+                    <h2>Lalith Kumar</h2>
+                    <p>Brand Manager</p>
+                </div>
+            </div>
+            
+            <div class="contact-details">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <span>+91 98765 43210</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <span>lalith.kumar@nextshoes.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <span>MG Road, Bangalore 560001</span>
+                    </div>
+                </div>
+                
+                <div class="website">
+                    www.nextshoes.com
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Jobs - Tribute Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 80px 0 60px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="1000" height="1000" fill="url(%23grain)"/></svg>');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            border-color: white;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 20px solid rgba(255,255,255,0.9);
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            margin-left: 5px;
+        }
+
+        .quote-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .quote-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .quote-text {
+            flex: 1;
+            order: 1;
+        }
+
+        .quote-image {
+            order: 2;
+            flex-shrink: 0;
+        }
+
+        .quote-content {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            color: #2c3e50;
+            font-weight: 300;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .quote-content::before {
+            content: '"';
+            font-size: 4rem;
+            color: #667eea;
+            position: absolute;
+            left: -30px;
+            top: -20px;
+            font-family: Georgia, serif;
+        }
+
+        .quote-author {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .quote-image {
+            width: 250px;
+            height: 300px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 20px;
+            border: 2px dashed #ccc;
+        }
+
+        .quote-image:hover {
+            transform: scale(1.05);
+        }
+
+        .biography-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            position: relative;
+        }
+
+        .biography-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: 20px auto 0;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .biography-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .biography-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.9);
+            text-align: justify;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .timeline-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            position: relative;
+        }
+
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-item {
+            background: rgba(255,255,255,0.95);
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+        }
+
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .timeline-event {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 0;
+            position: relative;
+        }
+
+        .footer-text {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .footer-link {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #764ba2;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .quote-card {
+                flex-direction: column;
+                padding: 40px 30px;
+                text-align: center;
+            }
+            
+            .quote-content {
+                font-size: 1.4rem;
+            }
+            
+            .quote-image {
+                width: 200px;
+                height: 240px;
+            }
+            
+            .biography-text {
+                padding: 30px 20px;
+            }
+            
+            .timeline-item {
+                margin: 20px 10px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1 class="main-title">Steve Jobs</h1>
+                <p class="subtitle">1955 - 2011</p>
+                <div class="play-button"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quote-section">
+        <div class="container">
+            <div class="quote-card">
+                <div class="quote-text">
+                    <p class="quote-content">Design is not just what it looks like and feels like. Design is how it works.</p>
+                    <p class="quote-author">— Steve Jobs</p>
+                </div>
+                <div class="quote-image">
+    <img src="data:image/jpeg;base64,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" alt="Steve Jobs" style="width:100%; height:100%; border-radius:15px; object-fit: cover;">
+</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="biography-section">
+        <div class="container">
+            <h2 class="section-title">Biography</h2>
+            <div class="biography-content">
+                <p class="biography-text">
+                    Steven Paul "Steve" Jobs was an American information technology entrepreneur and inventor. He was the co-founder, chairman, and CEO of Apple Inc; CEO and majority shareholder of Pixar Animation Studios; and founder, chairman, and CEO of NeXT Inc. Jobs is widely recognized as a pioneer of the microcomputer revolution of the 1970s, along with Apple co-founder Steve Wozniak. A creative entrepreneur whose passion for perfection and ferocious drive revolutionized six industries: personal computers, animated movies, music, phones, tablet computing, and digital publishing. His innovative vision and relentless pursuit of excellence transformed Apple into one of the world's most valuable companies, forever changing how we interact with technology in our daily lives.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.header');
+            const speed = scrolled * 0.5;
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+
+        document.querySelector('.play-button').addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 200);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        });
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

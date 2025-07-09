@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosa Parks Day Poster</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .poster {
+            width: 400px;
+            height: 600px;
+            background: linear-gradient(45deg, #e74c3c 0%, #c0392b 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .poster:hover {
+            transform: translateY(-8px);
+        }
+
+        .header {
+            position: absolute;
+            top: 40px;
+            left: 30px;
+            right: 30px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .courage-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .main-title {
+            font-size: 42px;
+            font-weight: 900;
+            color: white;
+            line-height: 0.9;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        /* Bus silhouette */
+        .bus-container {
+            position: absolute;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: 120px;
+        }
+
+        .bus {
+            width: 100%;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .bus-windows {
+            position: absolute;
+            top: 8px;
+            left: 20px;
+            right: 20px;
+            height: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .bus-window {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            top: 2px;
+        }
+
+        .bus-window:nth-child(1) { left: 10px; }
+        .bus-window:nth-child(2) { left: 50px; }
+        .bus-window:nth-child(3) { left: 90px; }
+        .bus-window:nth-child(4) { left: 130px; }
+        .bus-window:nth-child(5) { left: 170px; }
+
+        .bus-wheel {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: rgba(0, 0, 0, 0.9);
+            border-radius: 50%;
+            bottom: -10px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .bus-wheel:nth-child(1) { left: 30px; }
+        .bus-wheel:nth-child(2) { right: 30px; }
+
+        .date-container {
+            position: absolute;
+            top: 200px;
+            left: 30px;
+            right: 30px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .date {
+            background: rgba(255, 255, 255, 0.95);
+            color: #c0392b;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .quote {
+            position: absolute;
+            bottom: 250px;
+            left: 30px;
+            right: 30px;
+            text-align: center;
+            color: white;
+            font-size: 16px;
+            font-style: italic;
+            line-height: 1.5;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        .bottom-text {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        /* Decorative elements */
+        .star {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 20px;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        .star:nth-child(1) {
+            top: 15%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .star:nth-child(2) {
+            top: 25%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+
+        .star:nth-child(3) {
+            top: 35%;
+            left: 10%;
+            animation-delay: 2s;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Figure silhouette */
+        .figure {
+            position: absolute;
+            bottom: 180px;
+            right: 40px;
+            width: 60px;
+            height: 100px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 30px 30px 0 0;
+            z-index: 5;
+        }
+
+        .figure::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 15px;
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="poster">
+        <div class="star">★</div>
+        <div class="star">★</div>
+        <div class="star">★</div>
+        
+        <div class="header">
+            <div class="courage-text">COURAGE TO STAND</div>
+            <div class="main-title">ROSA<br>PARKS</div>
+            <div class="subtitle">MOTHER OF CIVIL RIGHTS</div>
+        </div>
+        
+        <div class="date-container">
+            <div class="date">FEBRUARY 4, 2025</div>
+        </div>
+        
+        <div class="quote">
+            "I would like to be remembered as a person<br>who wanted to be free"
+        </div>
+        
+        <div class="bus-container">
+            <div class="bus">
+                <div class="bus-windows">
+                    <div class="bus-window"></div>
+                    <div class="bus-window"></div>
+                    <div class="bus-window"></div>
+                    <div class="bus-window"></div>
+                    <div class="bus-window"></div>
+                </div>
+                <div class="bus-wheel"></div>
+                <div class="bus-wheel"></div>
+            </div>
+        </div>
+        
+        <div class="figure"></div>
+        
+        <div class="bottom-text">
+            REMEMBERING HER LEGACY
+        </div>
+    </div>
+</body>
+</html>

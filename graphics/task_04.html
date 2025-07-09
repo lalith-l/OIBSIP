@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Aerospace Industry Statistics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2d3748 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .infographic-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .infographic-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #3182ce, #805ad5, #d53f8c, #e53e3e, #dd6b20, #38a169);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #1a365d;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+
+        .rocket-icon {
+            font-size: 3em;
+            color: #3182ce;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: white;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: shimmer 4s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stat-card.card-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .stat-card.card-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .stat-card.card-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .stat-card.card-4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .stat-card.card-5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .stat-card.card-6 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #2d3748; }
+
+        .step-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-value {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .stat-description {
+            font-size: 0.9em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+            border-radius: 10px;
+            color: white;
+        }
+
+        .footer-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #63b3ed;
+        }
+
+        .source-note {
+            font-size: 0.9em;
+            color: #a0aec0;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .stat-value {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic-container">
+        <div class="header">
+            <div class="rocket-icon">🚀</div>
+            <h1>Advanced Aerospace Industry</h1>
+            <p>Key Statistics & Market Insights</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card card-1">
+                <div class="step-number">01</div>
+                <div class="stat-value">$374B</div>
+                <div class="stat-label">Global Market Size</div>
+                <div class="stat-description">The aerospace industry reached $374 billion in 2023, with commercial aviation driving 70% of total revenue</div>
+            </div>
+
+            <div class="stat-card card-2">
+                <div class="step-number">02</div>
+                <div class="stat-value">8.2%</div>
+                <div class="stat-label">Annual Growth Rate</div>
+                <div class="stat-description">Expected CAGR through 2028, driven by increasing air travel demand and space exploration investments</div>
+            </div>
+
+            <div class="stat-card card-3">
+                <div class="step-number">03</div>
+                <div class="stat-value">2.9M</div>
+                <div class="stat-label">Global Workforce</div>
+                <div class="stat-description">Highly skilled engineers, technicians, and professionals working in aerospace manufacturing and services</div>
+            </div>
+
+            <div class="stat-card card-4">
+                <div class="step-number">04</div>
+                <div class="stat-value">25,000</div>
+                <div class="stat-label">Active Satellites</div>
+                <div class="stat-description">Currently orbiting Earth, with 2,000+ launched annually for communications, navigation, and Earth observation</div>
+            </div>
+
+            <div class="stat-card card-5">
+                <div class="step-number">05</div>
+                <div class="stat-value">$95B</div>
+                <div class="stat-label">Space Economy</div>
+                <div class="stat-description">Commercial space industry value, including satellite services, launch services, and space manufacturing</div>
+            </div>
+
+            <div class="stat-card card-6">
+                <div class="step-number">06</div>
+                <div class="stat-value">42%</div>
+                <div class="stat-label">Fuel Efficiency Gain</div>
+                <div class="stat-description">Improvement in next-generation aircraft engines compared to previous models, reducing emissions significantly</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-icon">✈️</div>
+            <h3>The Future of Aerospace</h3>
+            <p>Advanced materials, AI integration, and sustainable propulsion systems are revolutionizing the industry</p>
+            <div class="source-note">Data compiled from industry reports and market research • 2024</div>
+        </div>
+    </div>
+</body>
+</html>
